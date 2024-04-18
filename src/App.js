@@ -1,31 +1,25 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function App() {
-  const [number, setNumber] = useState(0);
-  const [dark, setDark] = useState(true);
-  const doubleNumber = useMemo(() => slowFunction(number), [number]);
-  const themeStyles = {
-    backgroundColor: dark ? "black" : "white",
-    color: dark ? "white" : "black",
+  const [name, setName] = useState("");
+  const inputRef = useRef();
+
+  const focusInput = () => {
+    inputRef.current.focus();
   };
 
   return (
     <>
       <input
-        type="number"
-        value={number}
-        onChange={(e) => setNumber(parseInt(e.target.value))}
+        ref={inputRef}
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
-      <button onClick={() => setDark((prevDark) => !prevDark)}>改變主題</button>
-      <div style={themeStyles}>{doubleNumber}</div>
+      <div>我的名字是 : {name}</div>
+      <button onClick={focusInput}>focus</button>
     </>
   );
 }
-
-const slowFunction = (num) => {
-  console.log("呼叫 slowFunction");
-  for (let i = 0; i <= 1000000000; i++) {}
-  return num * 2;
-};
 
 export default App;
