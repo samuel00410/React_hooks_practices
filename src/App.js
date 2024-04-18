@@ -1,31 +1,22 @@
-import React, { useState, useMemo } from "react";
+// ./src/App.js
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home/Home";
+import { LanguageProvider } from "./LanguageContext";
 
 function App() {
-  const [number, setNumber] = useState(0);
-  const [dark, setDark] = useState(true);
-  const doubleNumber = useMemo(() => slowFunction(number), [number]);
-  const themeStyles = {
-    backgroundColor: dark ? "black" : "white",
-    color: dark ? "white" : "black",
-  };
-
   return (
-    <>
-      <input
-        type="number"
-        value={number}
-        onChange={(e) => setNumber(parseInt(e.target.value))}
-      />
-      <button onClick={() => setDark((prevDark) => !prevDark)}>改變主題</button>
-      <div style={themeStyles}>{doubleNumber}</div>
-    </>
+    <BrowserRouter>
+      <LanguageProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+          </Route>
+        </Routes>
+      </LanguageProvider>
+    </BrowserRouter>
   );
 }
-
-const slowFunction = (num) => {
-  console.log("呼叫 slowFunction");
-  for (let i = 0; i <= 1000000000; i++) {}
-  return num * 2;
-};
 
 export default App;
