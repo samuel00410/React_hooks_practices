@@ -1,24 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
+// ./src/App.js
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home/Home";
+import { LanguageProvider } from "./LanguageContext";
 
 function App() {
-  const [name, setName] = useState("");
-  const inputRef = useRef();
-
-  const focusInput = () => {
-    inputRef.current.focus();
-  };
-
   return (
-    <>
-      <input
-        ref={inputRef}
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <div>我的名字是 : {name}</div>
-      <button onClick={focusInput}>focus</button>
-    </>
+    <BrowserRouter>
+      <LanguageProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+          </Route>
+        </Routes>
+      </LanguageProvider>
+    </BrowserRouter>
   );
 }
 
