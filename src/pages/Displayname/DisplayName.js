@@ -1,9 +1,10 @@
 // ./src/components/DisplayName.js
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const DisplayName = () => {
-  const name = useSelector((state) => state.name);
+  // 從 store 中獲取 name 狀態
+  const name = useSelector((state) => state.nameSlice.name);
 
   return <div>{name}</div>;
 };
