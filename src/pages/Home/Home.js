@@ -5,6 +5,7 @@ import { LanguageContext } from "../../LanguageContext";
 const Home = () => {
   const { language, setLanguage } = useContext(LanguageContext);
 
+  // 偏好語言
   const languageNames = {
     chinese: "中文",
     english: "英文",
